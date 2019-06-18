@@ -3,7 +3,7 @@ node {
 stage('Backup Configuration as POL') {
 
 sh label: '', script: '''set -x
-export GW_DIR=/opt/axway/apigateway
+export GW_DIR=/opt/axway/Axway-7.6.2/apigateway
 export BACKUP_FILE=pol_backup
 
 for DIR in $(find ${GW_DIR}/groups/topologylinks/emt-group/conf/????????-* -maxdepth 0 -type d);
