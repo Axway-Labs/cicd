@@ -3,7 +3,7 @@ node {
 stage('Update Hosts File') {
 
 sh label: '', script: '''set -x
-bash update_hostsfile.sh
+bash Install_Gateway/update_hostsfile.sh
 '''
 }
 
