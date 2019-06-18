@@ -1,4 +1,7 @@
 node {
+
+stage('Backup Configuration as POL') {
+
 sh label: '', script: '''set -x
 export GW_DIR=/opt/axway/apigateway
 export BACKUP_FILE=pol_backup
@@ -8,3 +11,6 @@ do
    ${GW_DIR}y/posix/bin/projpack --create --name=${BACKUP_FILE} --type=pol --passphrase-none --add ${DIR} --projpass-none
 done'''
 }
+
+}
+
