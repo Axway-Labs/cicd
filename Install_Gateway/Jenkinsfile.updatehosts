@@ -7,12 +7,5 @@ bash update_hostsfile.sh
 '''
 }
 
-stage('Install Gateway') {
-
-sh label: '', script: '''set -x
-bash update_hostsfile.sh
-'''
-}
-
 }
 
