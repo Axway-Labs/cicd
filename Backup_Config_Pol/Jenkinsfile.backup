@@ -1,0 +1,10 @@
+node {
+sh label: '', script: '''set -x
+export GW_DIR=/opt/axway/apigateway
+export BACKUP_FILE=pol_backup
+
+for DIR in $(find ${GW_DIR}/groups/topologylinks/emt-group/conf/????????-* -maxdepth 0 -type d);
+do
+   ${GW_DIR}y/posix/bin/projpack --create --name=${BACKUP_FILE} --type=pol --passphrase-none --add ${DIR} --projpass-none
+done'''
+}
