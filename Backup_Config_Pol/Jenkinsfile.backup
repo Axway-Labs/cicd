@@ -1,16 +1,12 @@
 node {
-   checkout scm
-stage('Backup Configuration as POL') {
+  checkout scm
+  stage('Backup Configuration as POL') {
 
-sh label: '', script: '''set -x
-export GW_DIR=/opt/axway/Axway-7.6.2/apigateway
-export BACKUP_FILE=pol_backup
-export GROUP=api-env
+  sh label: '', script: '''set -x
+  ls -l 
+  sudo -E su - Backup_Config_Pol/axway backup_pol.sh
+  '''
 
-for DIR in $(find ${GW_DIR}/groups/topologylinks/${GROUP}/conf/????????-* -maxdepth 0 -type d);
-do
-   ${GW_DIR}/posix/bin/projpack --create --name=${BACKUP_FILE} --type=pol --passphrase-none --add ${DIR} --projpass-none
-done'''
 }
 
 }
