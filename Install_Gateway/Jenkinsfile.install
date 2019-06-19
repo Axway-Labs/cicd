@@ -1,0 +1,12 @@
+node {
+   checkout scm
+   
+   stage('Update Hosts File') {
+
+   sh label: '', script: '''set -x
+   bash Install_Gateway/update_hostsfile.sh
+   '''
+}
+
+}
+
