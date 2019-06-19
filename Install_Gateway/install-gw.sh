@@ -3,7 +3,7 @@
 source installationDetails.txt
 
 # unattended installation of APIGateway and other components depending on the entry of installationDetails.txt
-./APIGateway_7.6.2_Install_linux-x86-64_BN5.run --mode unattended --setup_type advanced --licensefilePath $licensefilePath --prefix $dir --enable-components $enable_components --disable-components $disable_components --username $username --adminpasswd $adminpasswd --cassandraInstalldir $cassandraInstalldir --cassandraJDK $cassandraJDK --startCassandra $cassandraStart --analyticsLicensefilePath $analyticsLicensefilePath --apimgmtLicensefilePath $apimgmtlicensefilePath
+./APIGateway_7.5.3_Install_linux-x86-64_BN8.run --mode unattended --setup_type advanced --licensefilePath $licensefilePath --prefix $dir --enable-components $enable_components --disable-components $disable_components --username $username --adminpasswd $adminpasswd --cassandraInstalldir $cassandraInstalldir --cassandraJDK $cassandraJDK --startCassandra $cassandraStart --analyticsLicensefilePath $analyticsLicensefilePath --apimgmtLicensefilePath $apimgmtlicensefilePath
 ####################################
 # Check is Cassandra is yes of not
 ####################################
