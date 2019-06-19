@@ -3,13 +3,12 @@ node {
   stage('Backup Configuration as POL') {
 
   sh label: '', script: '''set -x
-  ls -l 
-  sudo -E su - axway Backup_Config_Pol/backup_pol.sh
+  ls -l Backup_Config_Pol
+  chmod +x Backup_Config_Pol/*.sh
+  find . -name backup_pol.sh
+  sudo -E su - axway ${WORKSPACE}/Backup_Config_Pol/backup_pol.sh
   '''
 
 }
 
 }
-
-
-
