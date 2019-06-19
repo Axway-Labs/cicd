@@ -1,0 +1,25 @@
+node {
+    checkout scm
+    stage('Backup Configuration as POL') {
+
+       sh label: '', script: '''set -x 
+       find . -name backup_fed.sh
+       /usr/local/bin/backup_fed.sh
+       '''
+    }
+    
+    stage('Generate YAML to FED') {
+
+       sh label: '', script: '''set -x 
+       echo "Generate YAML to FED"
+       '''
+    }
+    
+    stage('Deploy FED to Gateway') {
+
+       sh label: '', script: '''set -x 
+       echo "Deploy FED to Gateway"
+       '''
+    }
+}
+
