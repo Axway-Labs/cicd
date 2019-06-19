@@ -8,9 +8,17 @@ node {
        '''
     }
     
+    stage('Clone YAMLES Repo') {
+
+       sh label: '', script: '''set -x 
+       git clone git@github.com:axwayhackathon/YamlES.git
+       ls -l $WORKSPACE
+       '''
+    
     stage('Generate YAML to FED') {
 
        sh label: '', script: '''set -x 
+       git clone git@github.com:axwayhackathon/YamlES.git
        echo "Generate YAML to FED"
        '''
     }
