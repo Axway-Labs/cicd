@@ -1,5 +1,5 @@
 node {
-
+   checkout scm
 stage('Backup Configuration as POL') {
 
 sh label: '', script: '''set -x
@@ -14,4 +14,6 @@ done'''
 }
 
 }
+
+
 
