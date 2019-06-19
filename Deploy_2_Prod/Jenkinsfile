@@ -5,6 +5,7 @@ node {
        sh label: '', script: '''set -x 
        find . -name backup_fed.sh
        sudo -E su - axway ${WORKSPACE}/Backup_Config_Pol/backup_pol.sh
+       /opt/axway/Axway-7.6.2/apigateway/posix/bin/managedomain --username=admin --password=changeme -g api-env -n api-env --download_archive --archive_output_dir=$HOME/backup_fed
        '''
     }
     
