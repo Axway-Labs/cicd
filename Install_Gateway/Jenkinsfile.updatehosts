@@ -1,5 +1,5 @@
 node {
-
+   checkout scm
    stage('Checkout') {
       sh '''
        #git clone git@github.com:axwayhackathon/cicd.git
