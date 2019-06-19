@@ -1,10 +1,10 @@
-dir="/opt/axway/Axway-7.6.2"
+dir="/opt/axway/Axway-7.5.3"
 analytics="yes"
 username="admin"
 adminpasswd="changeme"
-cassandra="no"
+cassandra="yes"
 cassandraInstalldir="/opt/axway/db/cassandra"
-cassandraJDK="/opt/axway/Axway-7.6.2/apigateway/platform/jre"
+cassandraJDK="/opt/axway/Axway-7.5.3/apigateway/platform/jre"
 analyticsLicenseFilePath="/opt/axway/apiportal.lic"
 licenseFilePath="/opt/axway/apiportal.lic"
 cassandrahost=api-env:9042
