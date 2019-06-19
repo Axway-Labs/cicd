@@ -11,8 +11,9 @@ node {
     stage('Clone YAMLES Repo') {
 
        sh label: '', script: '''set -x 
+       rm -rf YamlES
        git clone git@github.com:axwayhackathon/YamlES.git
-       ls -l $WORKSPACE
+       ls -l $WORKSPACE/YamlES
        '''
     }
     
