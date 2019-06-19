@@ -1,8 +1,15 @@
 node {
 
+   stage('Checkout') {
+      sh '''
+       git clone git@github.com:axwayhackathon/cicd.git
+   '''
+    }
+   
 stage('Update Hosts File') {
 
 sh label: '', script: '''set -x
+ls -al
 bash Install_Gateway/update_hostsfile.sh
 '''
 }
