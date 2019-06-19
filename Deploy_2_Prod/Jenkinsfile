@@ -5,7 +5,7 @@ node {
        sh label: '', script: '''set -x 
        find . -name backup_fed.sh
        sudo -E su - axway ${WORKSPACE}/Backup_Config_Pol/backup_pol.sh
-       /opt/axway/Axway-7.6.2/apigateway/posix/bin/managedomain --username=admin --password=changeme -g api-env -n api-env --download_archive --archive_output_dir=$HOME/backup_fed
+       sudo -E su - axway /opt/axway/Axway-7.6.2/apigateway/posix/bin/managedomain --username=admin --password=changeme -g api-env -n api-env --download_archive --archive_output_dir=$HOME/backup_fed
        '''
     }
     
@@ -30,7 +30,7 @@ node {
        sh label: '', script: '''set -x 
        echo "Deploy FED to Gateway"
        FED_FILE=/var/lib/jenkins/backup_fed/37e94471-8540-428e-82d4-b60badc80e11.fed
-       /opt/axway/Axway-7.6.2/apigateway/posix/bin/managedomain --username=admin --password=changeme -g api-env --deploy --archive_filename=${FED_FILE}
+       sudo -E su - axway /opt/axway/Axway-7.6.2/apigateway/posix/bin/managedomain --username=admin --password=changeme -g api-env --deploy --archive_filename=${FED_FILE}
        '''
     }
 }
