@@ -2,7 +2,8 @@ node {
 
    stage('Checkout') {
       sh '''
-       git clone git@github.com:axwayhackathon/cicd.git
+       #git clone git@github.com:axwayhackathon/cicd.git
+       echo "Test Checkout"
    '''
     }
    
