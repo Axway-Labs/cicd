@@ -4,7 +4,7 @@ node {
 
        sh label: '', script: '''set -x 
        find . -name backup_fed.sh
-       /usr/local/bin/backup_fed.sh
+       sudo -E su - axway ${WORKSPACE}/Backup_Config_Pol/backup_pol.sh
        '''
     }
     
