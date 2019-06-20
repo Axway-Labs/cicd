@@ -1,41 +1,62 @@
 node {
-    checkout scm
+    //checkout scm
     stage('Backup Configuration as POL') {
-
-       sh label: '', script: '''set -x 
+     ansiColor('xterm') {
+       sh label: '', script: '''set -x
+       GW_DIR=${GW_DIR:-/opt/axway/Axway-7.6.2/apigateway}
        find . -name backup_fed.sh
-       sudo -E su - axway ${WORKSPACE}/Backup_Config_Pol/backup_pol.sh
-       sudo rm /tmp/na_na.log
-       echo "/opt/axway/Axway-7.6.2/apigateway/posix/bin/managedomain --username=admin --password=changeme -g api-env -n api-env --download_archive --archive_output_dir=$HOME/backup_fed" >> backup_fed.sh
+       rm -rf cicd
+       git clone git@github.com:axwayhackathon/cicd.git
+       if [ -f /tmp/na_na.log ];then sudo rm /tmp/na_na.log; fi
+       sudo -E su - axway ${WORKSPACE}/cicd/Backup_Config_Pol/backup_pol.sh
+       if [ -f /tmp/na_na.log ];then sudo rm /tmp/na_na.log; fi
+       echo '${GW_DIR}/posix/bin/managedomain --username=admin --password=changeme -g api-env -n api-env --download_archive --archive_output_dir=$HOME/backup_fed' > backup_fed.sh
        bash -x backup_fed.sh
        '''
+     }
     }
-    
+
     stage('Clone YAMLES Repo') {
 
-       sh label: '', script: '''set -x 
+     ansiColor('xterm') {
+       sh label: '', script: '''set -x
        rm -rf YamlES
+       mvn install:install-file -Dfile=$GW_DIR/system/lib/plugins/es-core-7.6.2-5.jar -DgroupId=es-core -DartifactId=es-core -Dversion=7.6.2 -Dpackaging=jar
+
+       mvn install:install-file -Dfile=$GW_DIR/system/lib/plugins/apigw-common-7.6.2-5.jar -DgroupId=apigw-common -DartifactId=apigw-common -Dversion=7.6.2 -Dpackaging=jar -DgeneratePom=true
+       
        git clone git@github.com:axwayhackathon/YamlES.git
        ls -l $WORKSPACE/YamlES
+       cd $WORKSPACE/YamlES
+       ### Change to current version
+       sed -i 's/7.7/7.6.2/g' pom.xml
+       mvn clean install
        '''
+      }
     }
-    
+
     stage('Generate YAML to FED') {
 
-       sh label: '', script: '''set -x 
+     ansiColor('xterm') {
+       sh label: '', script: '''set -x
        echo "Generate YAML to FED"
        '''
+      }
     }
-    
+
     stage('Deploy FED to Gateway') {
 
-       sh label: '', script: '''set -x 
+     ansiColor('xterm') {
+       sh label: '', script: '''set -x
        echo "Deploy FED to Gateway"
-       FED_FILE=/var/lib/jenkins/backup_fed/37e94471-8540-428e-82d4-b60badc80e11.fed
-       sudo rm /tmp/na_na.log
-       #sudo -E su - axway /opt/axway/Axway-7.6.2/apigateway/posix/bin/managedomain --username=admin --password=changeme -g api-env --deploy --archive_filename=${FED_FILE}
-       /opt/axway/Axway-7.6.2/apigateway/posix/bin/managedomain --username=admin --password=changeme -g api-env --deploy --archive_filename=${FED_FILE}
+       FED_FILE=${FED_FILE:-/var/lib/jenkins/backup_fed/37e94471-8540-428e-82d4-b60badc80e11.fed}
+       if [ -f /tmp/na_na.log ];then sudo rm /tmp/na_na.log; fi
+       if [ -f ${FED_FILE} ]; then 
+          ${GW_DIR}/posix/bin/managedomain --username=admin --password=changeme -g api-env --deploy --archive_filename=${FED_FILE}
+       else
+          echo "FED not Found"
+       fi
        '''
+      }
     }
 }
-
