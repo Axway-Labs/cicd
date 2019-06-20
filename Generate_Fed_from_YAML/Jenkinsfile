@@ -1,0 +1,11 @@
+node {
+    checkout scm
+    stage('Generate FED from YAML') {
+
+    sh label: '', script: '''
+       echo 'Generate FED from YAML'
+       ls -l ${WORKSPACE}
+    '''
+    }
+}
+
